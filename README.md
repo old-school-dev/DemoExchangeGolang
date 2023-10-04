@@ -1,2 +1,2 @@
 # DemoExchangeGolang
-Library For Test Robot Trading Strategy in Go
+Library for test Robot Trading Strategy in Go
