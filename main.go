@@ -8,7 +8,7 @@ import (
 
 func main() {
 	log.Println("hello world")
-	ex := exchange.NewExchange("Famp","Visarut")
+	ex := exchange.NewExchange("","")
 	order := ex.CreateBuyOrder("BTC", 999)
 	log.Println(ex.GetOrderDetail(order.Id))
 	for i:=0; i < 10; i ++ {
