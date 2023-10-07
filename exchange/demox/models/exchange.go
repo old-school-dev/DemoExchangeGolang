@@ -1,12 +1,9 @@
-package demox
-
-import "log"
+package models
 
 type Exchange struct {
-	Pairs     map[string]*Pair
-	ApiKey    string
-	ApiSecret string
-	Orders    []Order
+	Pairs   map[string]*Pair
+	Orders  []Order
+	Wallets []Wallet
 }
 
 func (e *Exchange) GetPairs() []Pair {
@@ -35,44 +32,16 @@ func (e *Exchange) getNewId() uint64 {
 
 func (e Exchange) GetPrice(symbol string) float64 {
 	price := e.Pairs[symbol].AdjustPrice()
-	matchIds := e.CheckMatchOrder(symbol)
-	log.Println(e.Pairs[symbol].Price, matchIds)
+	e.checkMatchOrder(symbol)
 	return price
 }
 
-func (e *Exchange) CreateBuyOrder(symbol string, price float64) *Order {
-	id := e.getNewId()
-	newOrder := Order{
-		Id:     id,
-		Symbol: symbol,
-		Type:   ORDER_LIMIT,
-		Side:   SIDE_BUY,
-		Price:  price,
-		Status: STATUS_PENDING,
-	}
-	e.Orders = append(e.Orders, newOrder)
-	matchIds := e.CheckMatchOrder(symbol)
-	log.Println(matchIds)
-	return &newOrder
+func (e *Exchange) CreateWallet(wallet Wallet) Wallet {
+	e.Wallets = append(e.Wallets, wallet)
+	return wallet
 }
 
-func (e *Exchange) CreateSellOrder(symbol string, price float64) *Order {
-	id := e.getNewId()
-	newOrder := Order{
-		Id:     id,
-		Symbol: symbol,
-		Type:   ORDER_LIMIT,
-		Side:   SIDE_SELL,
-		Price:  price,
-		Status: STATUS_PENDING,
-	}
-	e.Orders = append(e.Orders, newOrder)
-	matchIds := e.CheckMatchOrder(symbol)
-	log.Println(matchIds)
-	return &newOrder
-}
-
-func (e *Exchange) CheckMatchOrder(symbol string) []uint64 {
+func (e *Exchange) checkMatchOrder(symbol string) []uint64 {
 	ids := []uint64{}
 	for index, order := range e.Orders {
 		if order.Status == STATUS_PENDING {

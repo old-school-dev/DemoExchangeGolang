@@ -1,4 +1,4 @@
-package demox
+package models
 
 import (
 	"math"

@@ -1,4 +1,4 @@
-package demox
+package models
 
 type Order struct {
 	Id     uint64
@@ -11,7 +11,7 @@ type Order struct {
 
 const (
 	MAX_PRICE_CHANGE_PERCENT = 1
-	
+
 	SIDE_BUY  = "BUY"
 	SIDE_SELL = "SELL"
 
@@ -20,5 +20,5 @@ const (
 
 	STATUS_PENDING = "PENDING"
 	STATUS_MATCH   = "MATCH"
-	STATUS_CANCEL = "CANCEL"
+	STATUS_CANCEL  = "CANCEL"
 )
