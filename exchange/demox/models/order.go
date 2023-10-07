@@ -1,6 +1,7 @@
 package models
 
 type Order struct {
+	Signer string
 	Id     uint64
 	Type   string
 	Side   string
@@ -9,16 +10,4 @@ type Order struct {
 	Symbol string
 }
 
-const (
-	MAX_PRICE_CHANGE_PERCENT = 1
-
-	SIDE_BUY  = "BUY"
-	SIDE_SELL = "SELL"
-
-	ORDER_LIMIT  = "LIMIT"
-	ORDER_MARKET = "MARKET"
-
-	STATUS_PENDING = "PENDING"
-	STATUS_MATCH   = "MATCH"
-	STATUS_CANCEL  = "CANCEL"
-)
+type Orders []Order

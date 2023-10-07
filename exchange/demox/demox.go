@@ -11,7 +11,6 @@ func NewExchange() *models.Exchange {
 	}
 	return &models.Exchange{
 		Pairs:   pairs,
-		Orders:  []models.Order{},
 		Wallets: []models.Wallet{},
 	}
 }
@@ -22,12 +21,12 @@ func NewAPI(key, secret string, exchange *models.Exchange) *models.API {
 		balances[pair] = 0
 	}
 	exchange.CreateWallet(models.Wallet{
-		ApiKey: key,
+		ApiKey:   key,
 		Balances: balances,
 	})
 	api := &models.API{
-		Key: key,
-		Secret: secret,
+		Key:      key,
+		Secret:   secret,
 		Exchange: exchange,
 	}
 	return api

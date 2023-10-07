@@ -10,6 +10,8 @@ type Pair struct {
 	Price  float64
 }
 
+type Pairs []Pair
+
 func NewPair(symbol string) *Pair {
 	startPrice := float64(1000)
 	return &Pair{Symbol: symbol, Price: startPrice}

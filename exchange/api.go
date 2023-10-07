@@ -9,6 +9,7 @@ type IAPI interface {
 	IExchange
 	CreateBuyOrder(symbol string, price float64) *models.Order
 	CreateSellOrder(symbol string, price float64) *models.Order
+
 }
 
 func NewAPI(key, secret string, exchange *models.Exchange) IAPI {

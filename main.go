@@ -20,8 +20,9 @@ func main() {
 func TestConnection() {
 	ex := exchange.NewExchange()
 	api1 := exchange.NewAPI("Famp", "Visarut", ex)
-	api2 := exchange.NewAPI("FFFFF", "AAAAA", ex)
+	// api2 := exchange.NewAPI("FFFFF", "AAAAA", ex)
 	log.Println(api1.GetPrice("BTC/THB"))
-	log.Println(api2)
+	api1.CreateBuyOrder("BTC/THB", 999)
+	log.Println(api1.GetOrders())
 	log.Println(ex)
 }

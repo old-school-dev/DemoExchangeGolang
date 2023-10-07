@@ -2,8 +2,8 @@ package models
 
 type Exchange struct {
 	Pairs   map[string]*Pair
-	Orders  []Order
-	Wallets []Wallet
+	Orders  Orders
+	Wallets Wallets
 }
 
 func (e *Exchange) GetPairs() []Pair {
@@ -21,13 +21,6 @@ func (e *Exchange) GetOrderDetail(id uint64) Order {
 		}
 	}
 	return Order{}
-}
-
-func (e *Exchange) getNewId() uint64 {
-	if len(e.Orders) == 0 {
-		return 0
-	}
-	return e.Orders[len(e.Orders)-1].Id + 1
 }
 
 func (e Exchange) GetPrice(symbol string) float64 {
