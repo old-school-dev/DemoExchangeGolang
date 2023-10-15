@@ -1,19 +1,19 @@
 package exchange
 
 import (
-	_"log"
-	"demox/exchange/demox"
+	"demo-strategy/exchange/demox"
+	"demo-strategy/exchange/demox/pair"
+	"demo-strategy/exchange/demox/exchange"
+	"demo-strategy/exchange/demox/order"
 )
 
 type IExchange interface {
-	GetPairs() []demox.Pair
-	GetOrderDetail(id uint64) demox.Order
+	GetPairs() []pair.Pair
 	GetPrice(symbol string) float64
-	CreateBuyOrder(symbol string, price float64) *demox.Order
-	CreateSellOrder(symbol string, price float64) *demox.Order
-	CheckMatchOrder(symbol string) []uint64
+	GetOrders() order.Orders
+
 }
 
-func NewExchange(apiKey, apiSecret string) IExchange{
-	return demox.NewExchange(apiKey,apiSecret)
+func NewExchange() *exchange.Exchange{
+	return demox.NewExchange()
 }
