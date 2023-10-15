@@ -1,30 +1,33 @@
 package demox
 
 import (
-	"demo-strategy/exchange/demox/models"
+	"demo-strategy/exchange/demox/exchange"
+	"demo-strategy/exchange/demox/api"
+	"demo-strategy/exchange/demox/pair"
+	"demo-strategy/exchange/demox/wallet"
 )
 
-func NewExchange() *models.Exchange {
-	pairs := map[string]*models.Pair{}
-	for _, pair := range PAIR_LIST {
-		pairs[pair] = models.NewPair(pair)
+func NewExchange() *exchange.Exchange {
+	pairs := map[string]*pair.Pair{}
+	for _, p := range GetPairList() {
+		pairs[p] = pair.NewPair(p)
 	}
-	return &models.Exchange{
+	return &exchange.Exchange{
 		Pairs:   pairs,
-		Wallets: []models.Wallet{},
+		Wallets: []wallet.Wallet{},
 	}
 }
 
-func NewAPI(key, secret string, exchange *models.Exchange) *models.API {
+func NewAPI(key, secret string, exchange *exchange.Exchange) *api.API {
 	balances := map[string]float64{}
-	for _, pair := range PAIR_LIST {
+	for _, pair := range GetCurrencyList() {
 		balances[pair] = 0
 	}
-	exchange.CreateWallet(models.Wallet{
+	exchange.CreateWallet(wallet.Wallet{
 		ApiKey:   key,
 		Balances: balances,
 	})
-	api := &models.API{
+	api := &api.API{
 		Key:      key,
 		Secret:   secret,
 		Exchange: exchange,
